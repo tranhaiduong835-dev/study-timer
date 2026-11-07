@@ -26,8 +26,7 @@
   function saveTimer() {
     localStorage.setItem(keys.remaining, String(remaining));
     localStorage.setItem(keys.mode, mode);
-    if (interval) localStorage.setItem(keys.endAt, String(Date.now() + remaining * 1000));
-    else localStorage.removeItem(keys.endAt);
+    if (!interval) localStorage.removeItem(keys.endAt);
   }
   function formatTime(seconds) {
     return String(Math.floor(seconds / 60)).padStart(2, "0") + ":" + String(seconds % 60).padStart(2, "0");
@@ -43,16 +42,16 @@
     saveTimer();
   }
   function drawProgress() {
-    $("completed-count").textContent = `${completed} ${completed === 1 ? "phiên" : "phiên"}`;
+    $("completed-count").textContent = `${completed} phiên`;
     $("progress-fill").style.width = `${Math.min(completed % 8, 8) / 8 * 100}%`;
     document.querySelector(".progress-track").setAttribute("aria-valuenow", String(completed % 8));
     $("cycle-dots").innerHTML = Array.from({ length: 4 }, (_, i) => `<span class="cycle-dot ${i < completed % 4 ? "is-done" : ""}"></span>`).join("");
   }
-  function setMode(nextMode, preserve = false) {
+  function setMode(nextMode) {
     if (!modes[nextMode]) return;
     pauseTimer();
     mode = nextMode;
-    if (!preserve) remaining = modes[mode].minutes * 60;
+    remaining = modes[mode].minutes * 60;
     tabs.forEach(tab => {
       const active = tab.dataset.mode === mode;
       tab.classList.toggle("is-active", active);
@@ -129,8 +128,7 @@
       item.append(check, text, remove);
       taskList.append(item);
     });
-    const remainingTasks = tasks.filter(task => !task.done).length;
-    $("task-count").textContent = String(remainingTasks);
+    $("task-count").textContent = String(tasks.filter(task => !task.done).length);
     $("empty-state").hidden = tasks.length > 0;
   }
   $("task-form").addEventListener("submit", event => {
