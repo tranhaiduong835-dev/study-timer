@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ef">
+  <meta name="description" content="Một không gian yên tĩnh để học tập tập trung theo nhịp Pomodoro.">
+  <title>Study Timer — Tập trung vào điều quan trọng</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Study Timer, trang chủ">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span>STUDY TIMER</span>
+      </a>
+      <p class="date-label" id="today-label"></p>
+    </header>
+
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">KHÔNG GIAN TẬP TRUNG</p>
+      <h1 id="page-title">Dành trọn tâm trí<br>cho <em>điều quan trọng.</em></h1>
+      <p class="intro-copy">Từng khoảng thời gian nhỏ, tạo nên những tiến bộ lớn.</p>
+    </section>
+
+    <section class="workspace" aria-label="Bộ hẹn giờ và danh sách việc cần làm">
+      <div class="timer-card">
+        <div class="session-tabs" role="group" aria-label="Chọn phiên làm việc">
+          <button class="session-tab is-active" data-mode="focus" aria-pressed="true">Tập trung</button>
+          <button class="session-tab" data-mode="short" aria-pressed="false">Nghỉ ngắn</button>
+          <button class="session-tab" data-mode="long" aria-pressed="false">Nghỉ dài</button>
+        </div>
+
+        <div class="timer-face" aria-live="off">
+          <span class="timer-caption" id="timer-caption">PHIÊN TẬP TRUNG</span>
+          <span class="timer-display" id="timer-display" role="timer" aria-label="25 phút 00 giây">25:00</span>
+          <span class="timer-subtitle" id="timer-subtitle">Một việc tại một thời điểm.</span>
+        </div>
+
+        <div class="timer-actions">
+          <button class="button button-primary" id="start-button">
+            <span class="play-icon" aria-hidden="true"></span><span>Bắt đầu</span>
+          </button>
+          <button class="icon-button" id="reset-button" aria-label="Đặt lại phiên" title="Đặt lại phiên">↺</button>
+          <button class="icon-button" id="skip-button" aria-label="Chuyển phiên" title="Chuyển phiên">↠</button>
+        </div>
+
+        <div class="session-progress">
+          <div class="progress-copy"><span>TIẾN ĐỘ HÔM NAY</span><span id="completed-count">0 phiên</span></div>
+          <div class="progress-track" role="progressbar" aria-label="Số phiên tập trung hoàn thành" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0">
+            <span id="progress-fill"></span>
+          </div>
+          <div class="cycle-dots" id="cycle-dots" aria-label="Chu kỳ tập trung"></div>
+        </div>
+      </div>
+
+      <aside class="tasks-card" aria-labelledby="tasks-title">
+        <div class="tasks-heading">
+          <div>
+            <p class="eyebrow">GIỮ ĐÚNG TRỌNG TÂM</p>
+            <h2 id="tasks-title">Việc cần làm</h2>
+          </div>
+          <span class="task-count" id="task-count">0</span>
+        </div>
+        <form class="task-form" id="task-form">
+          <label class="visually-hidden" for="task-input">Thêm việc cần làm</label>
+          <input id="task-input" name="task" type="text" maxlength="120" placeholder="Thêm một việc cần làm…" autocomplete="off">
+          <button class="add-button" type="submit" aria-label="Thêm việc">+</button>
+        </form>
+        <ul class="task-list" id="task-list"></ul>
+        <p class="empty-state" id="empty-state">Viết ra điều bạn muốn hoàn thành hôm nay.</p>
+        <div class="task-footer"><span>Dữ liệu được lưu trên thiết bị này</span><button id="clear-completed" type="button">Xóa việc đã xong</button></div>
+      </aside>
+    </section>
+
+    <footer class="page-footer"><span>HỌC TẬP CÓ CHỦ ĐÍCH</span><span class="footer-rule"></span><span>MỘT NHỊP ĐỘ BỀN VỮNG</span></footer>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </main>
+</body>
+</html>
