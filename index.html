@@ -36,6 +36,15 @@
           <button class="session-tab" data-mode="long" aria-pressed="false">Nghỉ dài</button>
         </div>
 
+        <form class="timer-settings" id="timer-settings" aria-label="Cài đặt thời lượng">
+          <label>Học <input id="focus-minutes" type="number" min="1" max="180" value="25" aria-label="Thời lượng học tính bằng phút"></label>
+          <span aria-hidden="true">/</span>
+          <label>Nghỉ <input id="break-minutes" type="number" min="1" max="60" value="5" aria-label="Thời lượng nghỉ ngắn tính bằng phút"></label>
+          <span>phút</span>
+          <button type="submit">Lưu</button>
+        </form>
+
+        <p class="active-task-label" id="active-task-label">Chưa chọn việc học</p>
         <div class="timer-face" aria-live="off">
           <span class="timer-caption" id="timer-caption">PHIÊN TẬP TRUNG</span>
           <span class="timer-display" id="timer-display" role="timer" aria-label="25 phút 00 giây">25:00</span>
@@ -76,6 +85,11 @@
         <p class="empty-state" id="empty-state">Viết ra điều bạn muốn hoàn thành hôm nay.</p>
         <div class="task-footer"><span>Dữ liệu được lưu trên thiết bị này</span><button id="clear-completed" type="button">Xóa việc đã xong</button></div>
       </aside>
+    </section>
+
+    <section class="today-stats" aria-label="Thống kê hôm nay">
+      <div class="stat-item"><span class="eyebrow">THỜI GIAN HỌC HÔM NAY</span><strong id="today-study-time">0 phút</strong></div>
+      <div class="stat-item"><span class="eyebrow">VIỆC ĐÃ HOÀN THÀNH HÔM NAY</span><strong id="today-task-count">0</strong></div>
     </section>
 
     <footer class="page-footer"><span>HỌC TẬP CÓ CHỦ ĐÍCH</span><span class="footer-rule"></span><span>MỘT NHỊP ĐỘ BỀN VỮNG</span></footer>
