@@ -19,5 +19,6 @@ Mở `index.html` trong trình duyệt. Không cần cài đặt thư viện ho�
 - `index.html`: cấu trúc trang.
 - `style.css`: giao diện thích ứng cho màn hình lớn và điện thoại.
 - `script.js`: timer và quản lý danh sách việc.
+- `assets/`: nơi đặt icon, âm thanh hoặc hình ảnh khi cần.
 
 Ứng dụng dùng Google Fonts (Playfair Display và DM Sans) khi có kết nối mạng, đồng thời có font dự phòng cục bộ.
