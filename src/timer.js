@@ -84,8 +84,20 @@ export function createTimer({ durations, onChange, onComplete, onStudySeconds })
     if (saved.deadline > Date.now()) {
       deadline = saved.deadline;
       remaining = Math.ceil((deadline - Date.now()) / 1000);
-      lastFocusLogAt = saved.lastLoggedAt || Date.now();
+      const midnight = new Date();
+      midnight.setHours(0, 0, 0, 0);
+      lastFocusLogAt = Math.max(saved.lastLoggedAt || Date.now(), midnight.getTime());
       interval = setInterval(tick, 250);
+    } else if (saved.deadline && saved.deadline <= Date.now()) {
+      deadline = saved.deadline;
+      lastFocusLogAt = saved.lastLoggedAt || deadline;
+      interval = setInterval(tick, 250);
+      sync(deadline);
+      stopInterval();
+      deadline = 0;
+      remaining = 0;
+      onComplete(mode);
+      return;
     } else {
       remaining = Math.max(0, Number(saved.remaining) || durations[mode] * 60);
     }
