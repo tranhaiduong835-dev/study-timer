@@ -22,3 +22,10 @@ Mở `index.html` trong trình duyệt. Không cần cài đặt thư viện ho�
 - `assets/`: nơi đặt icon, âm thanh hoặc hình ảnh khi cần.
 
 Ứng dụng dùng Google Fonts (Playfair Display và DM Sans) khi có kết nối mạng, đồng thời có font dự phòng cục bộ.
+
+## Code structure
+
+- `index.html` and `style.css`: page structure and presentation.
+- `script.js`: connects interface events and renders state.
+- `src/timer.js`: timer state and Pomodoro transitions.
+- `src/storage.js`: browser storage for tasks, settings, timer state, and daily totals.
