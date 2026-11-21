@@ -33,7 +33,7 @@ let stats = loadTodayStats();
 let toastTimeout;
 let timerState = { mode: "focus", remaining: preferences.focus * 60, running: false };
 const timer = createTimer({
-  durations: preferences,
+  durations: { ...preferences, long: 15 },
   onChange: state => {
     timerState = state;
     saveTimer(state);
@@ -70,6 +70,11 @@ function formatTime(seconds) {
 }
 function renderTimer() {
   const { mode, remaining, running } = timerState;
+  tabs.forEach(tab => {
+    const active = tab.dataset.mode === mode;
+    tab.classList.toggle("is-active", active);
+    tab.setAttribute("aria-pressed", String(active));
+  });
   const value = formatTime(remaining);
   display.textContent = value;
   display.setAttribute("aria-label", `${Math.floor(remaining / 60)} phút ${remaining % 60} giây`);
