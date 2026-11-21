@@ -29,11 +29,32 @@ function getStats() {
 
 export function loadTasks() { return read(keys.tasks, []); }
 export function saveTasks(tasks) { write(keys.tasks, tasks); }
-export function loadPreferences() { return read(keys.preferences, { focus: 25, short: 5 }); }
+export function loadPreferences() {
+  const saved = read(keys.preferences, {});
+  return {
+    focus: Number(saved.focus) || Number(localStorage.getItem("studyTimer.focusMinutes")) || 25,
+    short: Number(saved.short) || Number(localStorage.getItem("studyTimer.breakMinutes")) || 5
+  };
+}
 export function savePreferences(preferences) { write(keys.preferences, preferences); }
-export function loadTimer() { return read(keys.timer, null); }
+export function loadTimer() {
+  const saved = read(keys.timer, null);
+  if (saved) return saved;
+  const mode = localStorage.getItem("studyTimer.mode");
+  if (!mode) return null;
+  return {
+    mode,
+    remaining: Number(localStorage.getItem("studyTimer.remaining")) || 0,
+    deadline: Number(localStorage.getItem("studyTimer.endAt")) || 0,
+    lastLoggedAt: Number(localStorage.getItem("studyTimer.lastLoggedAt")) || 0
+  };
+}
 export function saveTimer(state) { write(keys.timer, state); }
-export function loadActiveTask() { return read(keys.activeTask, ""); }
+export function loadActiveTask() {
+  const raw = localStorage.getItem(keys.activeTask);
+  if (!raw) return "";
+  try { return JSON.parse(raw); } catch { return raw; }
+}
 export function saveActiveTask(id) { write(keys.activeTask, id); }
 export function loadCompletedSessions() { return Number(read(keys.completed, 0)) || 0; }
 export function saveCompletedSessions(count) { write(keys.completed, count); }
